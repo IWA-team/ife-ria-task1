@@ -7,6 +7,9 @@ li {
   top: 0px;
   left: 0px;
 }
+a {
+  width: 100%;
+}
 a:link {
   text-decoration: none;
   color: #0099cc;
@@ -36,9 +39,12 @@ nav.top li {
   padding: 0 ;
   height: 30px;
   line-height: 30px;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 }
-nav.top li.hover {
+nav.top li .phptos {
+  display: inline-block;
+}
+nav.top li .phptos:hover {
   background-color: #fff;
 }
 section.content {
@@ -55,7 +61,6 @@ section.content ul li {
   margin: 5px 5px 5px 5px;
   width: 260px;
   height: 180px;
-  z-index: 1;
 }
 section.content ul li img {
   position: relative;
@@ -101,4 +106,37 @@ section.content ul li img {
   height: auto;
   z-index: 9;
   opacity: 1;
+}
+.dropdown {
+  float: right;
+  width: 70px;
+}
+.dropdown a {
+  display: block;
+  text-align: right;
+}
+.dropdown ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  float: right;
+  visibility: hidden;
+  border-top: 1px solid white;
+}
+.dropdown ul .drop {
+  width: 100%;
+  height: 10px;
+  float: right;
+  display: inline;
+  z-index: 2;
+}
+.dropdown ul .drop a {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  background: #c0c0c0;
+  color: #24313C;
+}
+.dropdown ul .drop a:hover {
+  background: #99ccff;
 }

@@ -1,11 +1,31 @@
-//鼠标悬停导航栏变色//不好使
-$('nav li').hover ( function() {
-	$("this").css('background-color','#fff');
-	console.log($("this").css('background-color', '#c0c0c0'));
-},function() {
-	$("this").css('background-color','#c0c0c0');
-});
-//h获取图片数组
+//鼠标悬停导航栏变色 //好使
+var timeout         = 500;
+var closetimer		= 0;
+var ddmenuitem      = 0;
+
+function jsddm_open()
+{	jsddm_canceltimer();
+	jsddm_close();
+	ddmenuitem = $(this).find('ul').eq(0).css('visibility', 'visible');}
+
+function jsddm_close()
+{	if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{	closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{	if(closetimer)
+	{	window.clearTimeout(closetimer);
+		closetimer = null;}}
+
+$(document).ready(function()
+{	$('.dropdown').bind('mouseover', jsddm_open);
+	$('.dropdown').bind('mouseout',  jsddm_timer);});
+
+document.onclick = jsddm_close;
+
+//图片全屏//获取图片数组
 var imgArr=$('img.pic');
 $('img').click(function (){
 	var currentImg=$(this);
