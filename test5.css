@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+  top: 0px;
+  left: 0px;
+}
+a {
+  width: 100%;
+}
+a:link {
+  text-decoration: none;
+  color: #fff;
+}
+a:hover {
+  color: #0000cc;
+}
+body {
+  width: 100%;
+  background: #c0c0c0;
+  font-size: 16px;
+  color: #333;
+  float: left;
+}
+nav.top {
+  z-index: 2;
+  height: 30px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: #336699;
+  width: 100%;
+}
+nav.top li {
+  display: inline-block;
+  text-align: center;
+  width: 19%;
+  padding: 0 ;
+  height: 30px;
+  line-height: 30px;
+  /* border-bottom: 1px solid #ddd; */
+}
+nav.top li .phptos {
+  display: inline-block;
+}
+nav.top li .phptos:hover {
+  background-color: #fff;
+}
+section.content {
+  position: relative;
+  top: 50px;
+  margin: 0 auto;
+  width: 80%;
+}
+section.content ul li {
+  background-color: #fff;
+  float: left;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  margin: 5px 5px 5px 5px;
+  width: 260px;
+  height: 200px;
+  border: 5px solid #fff;
+  -moz-border-radius: 5px;
+  /* Gecko browsers */
+  -webkit-border-radius: 5px;
+  /* Webkit browsers */
+  border-radius: 5px;
+  /* W3C syntax */
+}
+section.content ul li img {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.wall {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.7;
+  z-index: 2;
+}
+.wall .btn {
+  z-index: 4;
+  height: 60px;
+  width: 60px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+}
+.wall .btn img {
+  height: 100%;
+  width: 100%;
+}
+.wall .btn.prev {
+  left: 0%;
+}
+.wall .btn.next {
+  float: right;
+  right: 0%;
+}
+.bigImg {
+  position: fixed;
+  max-width: 100%;
+  max-height: 90%;
+  width: 75%;
+  height: auto;
+  z-index: 9;
+  opacity: 1;
+}
+.dropdown {
+  float: right;
+  width: 70px;
+}
+.dropdown a {
+  display: block;
+  text-align: right;
+}
+.dropdown ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  float: right;
+  visibility: hidden;
+  border-top: 1px solid white;
+}
+.dropdown ul .drop {
+  border: none;
+  width: 100%;
+  height: 10px;
+  float: right;
+  display: inline;
+  z-index: 2;
+}
+.dropdown ul .drop a {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  background: #336699;
+  color: #fff;
+}
+.dropdown ul .drop a:hover {
+  color: black;
+  background: #99ccff;
+}
