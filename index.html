@@ -18,12 +18,12 @@
 </nav>
 <section class="content">
   <ul>
-    <li>
+    <li draggable="true" class="dragLi">
       <input type="hidden" class="imgId" value="img1"/>
       <input type="hidden" class="imgIndex" value="1"/>
       <input type="hidden" class="imgTag" value="风景" />
-      <div class=imgAddr>
-        <img src="http://placehold.it/200x200" alt="..." title="img"/>
+      <div class="imgAddr">
+        <img draggable="false" src="http://placehold.it/200x200" alt="..." title="img1"/>
       </div>
       <div class="footer">
         <span class="imgName">图片1</span>
@@ -35,15 +35,49 @@
         </ul>
       </div>
     </li>
-    <li>
+    <li draggable="true" class="dragLi">
       <input type="hidden" class="imgId" value="img1"/>
       <input type="hidden" class="imgIndex" value="1"/>
       <input type="hidden" class="imgTag" value="风景" />
       <div class="imgAddr">
-        <img src="http://placehold.it/200x200" alt="..." title="img"/>
+        <img draggable="false" src="http://placehold.it/200x300" alt="..." title="img2"/>
       </div>
       <div class="footer">
         <span class="imgName">图片2</span>
+        <button class="dropdown">...</button>
+        <ul>
+          <li><button>功能1</button></li>
+          <li><button>功能2</button></li>
+          <li><button>功能3</button></li>
+        </ul>
+      </div>
+    </li>
+    <li draggable="true" class="dragLi">
+      <input type="hidden" class="imgId" value="img1"/>
+      <input type="hidden" class="imgIndex" value="1"/>
+      <input type="hidden" class="imgTag" value="风景" />
+      <div class="imgAddr">
+        <img draggable="false" src="http://placehold.it/200x100" alt="..." title="img2"/>
+      </div>
+      <div class="footer">
+        <span class="imgName">图片3</span>
+        <button class="dropdown">...</button>
+        <ul>
+          <li><button>功能1</button></li>
+          <li><button>功能2</button></li>
+          <li><button>功能3</button></li>
+        </ul>
+      </div>
+    </li>
+    <li draggable="true" class="dragLi hidden">
+      <input type="hidden" class="imgId" value="img1"/>
+      <input type="hidden" class="imgIndex" value="1"/>
+      <input type="hidden" class="imgTag" value="风景" />
+      <div class="imgAddr">
+        <img draggable="false" src="http://placehold.it/200x200" alt="..." title="img1"/>
+      </div>
+      <div class="footer">
+        <span class="imgName">图片1</span>
         <button class="dropdown">...</button>
         <ul>
           <li><button>功能1</button></li>
@@ -56,5 +90,6 @@
 </section>
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/less.min.js" type="text/javascript"></script>
+<script src="./js/draggable.js" type="text/javascript"></script>
 </body>
 </html>
