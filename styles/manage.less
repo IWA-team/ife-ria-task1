@@ -23,56 +23,41 @@ body {
   font-size: 16px;
   color: #333;
   float: left;
-  section.wrapper {
-    width: 100%;
-    float: left;
-    div.content {
-      margin-left: 20%;
-      ul {
-        float: left;
-        width: 100%;
-        li {
-          width: 30%;
-          float: left;
-          margin-right: 3%;
-          border: 1px solid #999;
-          .imgAddr {
-            margin: 0 auto;
-            width: 100%;
-            height: 70%;
-            img {
+}
 
-            }
-          }
-        }
-      }
-    }
-  }
-  aside.nav {
+nav.nav {
+  &.left {
     width: 20%;
-    margin-left: -100%;
     float: left;
-    ul {
-      padding-right: 5px;
-      li {
-        width: 100%;
-        border-bottom: 2px solid #ccc;
-        height: 30px;
-        line-height: 30px;
-        a.photosName {
-          width: 60%;
-          color: #0099cc;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-        span.photosCount {
-          font-style: italic;
-          font-weight: bold;
-          color: #333;
-          padding: 0 8px;
-        }
+    ul li {
+      width: 100%;
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}
+
+section.content {
+  float: right;
+  margin-left: 20px;
+  width: 75%;
+  ul {
+    li {
+      display: inline-block;
+      width: 30%;
+      margin-right: 2%;
+      &.droppable {
+        border: 1px solid #ff3300;
+      }
+      &.hidden {
+        display: none;
       }
     }
   }
+}
+
+.wu-example {
+  clear: both;
 }
