@@ -1,205 +1,205 @@
 // JavaScript Document
-//¶¨ÒåÈ«¾Ö±äÁ¿
+//å®šä¹‰å…¨å±€å˜é‡
 var arr={};
-//µÚ¶þÆÚÈÎÎñÖ÷Òª´úÂë
-//ÓÉ´«ÈëÕÕÆ¬µÄid ´´½¨Ò»¸ö¶¯Ì¬µÄdiv  ²¢ÀûÓÃcssÊµÏÖÕÚÕÖÐ§¹û
+//ç¬¬äºŒæœŸä»»åŠ¡ä¸»è¦ä»£ç 
+//ç”±ä¼ å…¥ç…§ç‰‡çš„id åˆ›å»ºä¸€ä¸ªåŠ¨æ€çš„div  å¹¶åˆ©ç”¨csså®žçŽ°é®ç½©æ•ˆæžœ
 function editPhoto(photoid){
-	
-	}
 
-//¸ù¾Ýµ±Ç°µÄÁÐ±íÉú³Éjson  µÚÒ»ÆÚÈÎÎñÖ÷Òª´úÂë
+  }
+
+//æ ¹æ®å½“å‰çš„åˆ—è¡¨ç”Ÿæˆjson  ç¬¬ä¸€æœŸä»»åŠ¡ä¸»è¦ä»£ç 
 function arrToString(newList,str){
-	str+="{"+"\""+"photo"+"\""+":[" + "";
-	for(var i=0;i<newList.length;i++){
-		if(i==newList.length-1){
-			str+="{"+"\"id\":"+newList[i][0]+",\"name\":"+"\""+newList[i][1]+"\""+",\"number\":"+newList[i][3]+",\"index\":"+(newList[i][2]+1)+"}";
-			}else{
-			str+="{"+"\"id\":"+newList[i][0]+",\"name\":"+"\""+newList[i][1]+"\""+",\"number\":"+newList[i][3]+",\"index\":"+(newList[i][2]+1)+"},";
-			}
-		}
-		str+="]}";
-	var json = eval('(' + str + ')'); 
-		console.log(json.photo);
-		return json;
-	}
-//·¢³öajaxÇëÇó °Ñjson Å×¸ø·þÎñÆ÷ ÖØÐ´photo.js
+  str+="{"+"\""+"photo"+"\""+":[" + "";
+  for(var i=0;i<newList.length;i++){
+    if(i==newList.length-1){
+      str+="{"+"\"id\":"+newList[i][0]+",\"name\":"+"\""+newList[i][1]+"\""+",\"number\":"+newList[i][3]+",\"index\":"+(newList[i][2]+1)+"}";
+      }else{
+      str+="{"+"\"id\":"+newList[i][0]+",\"name\":"+"\""+newList[i][1]+"\""+",\"number\":"+newList[i][3]+",\"index\":"+(newList[i][2]+1)+"},";
+      }
+    }
+    str+="]}";
+  var json = eval('(' + str + ')');
+    console.log(json.photo);
+    return json;
+  }
+//å‘å‡ºajaxè¯·æ±‚ æŠŠjson æŠ›ç»™æœåŠ¡å™¨ é‡å†™photo.js
 function changeAjax(json,url){
 $.ajax({
-            //Ìá½»Êý¾ÝµÄÀàÐÍ POST GET
+            //æäº¤æ•°æ®çš„ç±»åž‹ POST GET
             type:"POST",
-            //Ìá½»µÄÍøÖ·
+            //æäº¤çš„ç½‘å€
             url:url,
-            //Ìá½»µÄÊý¾Ý
+            //æäº¤çš„æ•°æ®
             data:json,
-            //·µ»ØÊý¾ÝµÄ¸ñÊ½
+            //è¿”å›žæ•°æ®çš„æ ¼å¼
             datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
-            //³É¹¦·µ»ØÖ®ºóµ÷ÓÃµÄº¯Êý             
+            //æˆåŠŸè¿”å›žä¹‹åŽè°ƒç”¨çš„å‡½æ•°
             success:function(data){
-				//alert("well done");
+        //alert("well done");
             }   ,
-            //µ÷ÓÃÖ´ÐÐºóµ÷ÓÃµÄº¯Êý
+            //è°ƒç”¨æ‰§è¡ŒåŽè°ƒç”¨çš„å‡½æ•°
             complete: function(XMLHttpRequest, textStatus){
               // alert(XMLHttpRequest.responseText);
                alert(textStatus);
                 //HideLoading();
             },
-            //µ÷ÓÃ³ö´íÖ´ÐÐµÄº¯Êý
+            //è°ƒç”¨å‡ºé”™æ‰§è¡Œçš„å‡½æ•°
             error: function(){
-                //ÇëÇó³ö´í´¦Àí
-				alert("something wrong");
-            }         
-         });	
-	}
-//»ñÈ¡µ±Ç°Í¼Æ¬ÔªËØÊý×é
+                //è¯·æ±‚å‡ºé”™å¤„ç†
+        alert("something wrong");
+            }
+         });
+  }
+//èŽ·å–å½“å‰å›¾ç‰‡å…ƒç´ æ•°ç»„
 function getImgListNow(arrList){
-	$.each($(".content ul "),function(i,val){
-						var classid=val.id;
-						$.each($(".content ul").eq(i).children(),function(i,val){
-						var id=val.id;
-						var addr=val.getAttribute("addr");
-						var tag=val.getAttribute("tag");
-						var name=val.getAttribute("name");
-						var index=(i+1);
-						var oclass=classid;
-						arrList.push([id,addr,name,tag,index,oclass])												 
-						} );
-										
-						});
-	console.log(arrList);
-	return arrList;	
-	}
-//¸ù¾Ýµ±Ç°µÄÍ¼Æ¬ÁÐ±íÉú³Éjson
+  $.each($(".content ul "),function(i,val){
+            var classid=val.id;
+            $.each($(".content ul").eq(i).children(),function(i,val){
+            var id=val.id;
+            var addr=val.getAttribute("addr");
+            var tag=val.getAttribute("tag");
+            var name=val.getAttribute("name");
+            var index=(i+1);
+            var oclass=classid;
+            arrList.push([id,addr,name,tag,index,oclass])
+            } );
+
+            });
+  console.log(arrList);
+  return arrList;
+  }
+//æ ¹æ®å½“å‰çš„å›¾ç‰‡åˆ—è¡¨ç”Ÿæˆjson
 function arrToStringImg(newList,str){
-	str+="{"+"\""+"detail"+"\""+":[" + "";
-	for(var i=0;i<newList.length;i++){
-		if(i==newList.length-1){
-			str+="{"+"\"id\":"+"\""+newList[i][0]+"\""+",\"addr\":"+"\""+newList[i][1]+"\""+",\"name\":"+"\""+newList[i][2]+"\""+",\"tag\":"+"\""+newList[i][3]+"\""+",\"index\":"+"\""+newList[i][4]+"\""+",\"oclass\":"+"\""+newList[i][5]+"\""+"}";
-			}else{
-			str+="{"+"\"id\":"+"\""+newList[i][0]+"\""+",\"addr\":"+"\""+newList[i][1]+"\""+",\"name\":"+"\""+newList[i][2]+"\""+",\"tag\":"+"\""+newList[i][3]+"\""+",\"index\":"+"\""+newList[i][4]+"\""+",\"oclass\":"+"\""+newList[i][5]+"\""+"},";
-			}
-		}
-		str+="]}";
-	//console.log(str);
-	var json = eval('(' + str + ')'); 
-		//console.log(json);
-		return json;
-	}
-//´«ÈëidÊôÐÔ È¥¸Ä±äÕû¸öcontentµÄÑùÊ½
+  str+="{"+"\""+"detail"+"\""+":[" + "";
+  for(var i=0;i<newList.length;i++){
+    if(i==newList.length-1){
+      str+="{"+"\"id\":"+"\""+newList[i][0]+"\""+",\"addr\":"+"\""+newList[i][1]+"\""+",\"name\":"+"\""+newList[i][2]+"\""+",\"tag\":"+"\""+newList[i][3]+"\""+",\"index\":"+"\""+newList[i][4]+"\""+",\"oclass\":"+"\""+newList[i][5]+"\""+"}";
+      }else{
+      str+="{"+"\"id\":"+"\""+newList[i][0]+"\""+",\"addr\":"+"\""+newList[i][1]+"\""+",\"name\":"+"\""+newList[i][2]+"\""+",\"tag\":"+"\""+newList[i][3]+"\""+",\"index\":"+"\""+newList[i][4]+"\""+",\"oclass\":"+"\""+newList[i][5]+"\""+"},";
+      }
+    }
+    str+="]}";
+  //console.log(str);
+  var json = eval('(' + str + ')');
+    //console.log(json);
+    return json;
+  }
+//ä¼ å…¥idå±žæ€§ åŽ»æ”¹å˜æ•´ä¸ªcontentçš„æ ·å¼
 function changeDisplay(idName){
-	$.each($(".content ul"),function(i,val){
-			if(val.id==idName){
-				$(".content ul").eq(i).css("display","block");
-				}else{
-				$(".content ul").eq(i).css("display","none");
-					}
-			
-		});	
-	}
-//´«ÈëidÊôÐÔ È¥¸Ä±ä·ÖÀà
+  $.each($(".content ul"),function(i,val){
+      if(val.id==idName){
+        $(".content ul").eq(i).css("display","block");
+        }else{
+        $(".content ul").eq(i).css("display","none");
+          }
+
+    });
+  }
+//ä¼ å…¥idå±žæ€§ åŽ»æ”¹å˜åˆ†ç±»
 function changeImgList(idName,moveList){
-	$.each($(".content ul"),function(i,val){
-			if(val.id==idName){
-				$(".content ul").eq(i).append(moveList);
-				}		
-		});		
-	}
-//»­³öÈ«²¿Ïà²á
-//³õÊ¼»°ÁÐ±íÍ·ÊýÁ¿
+  $.each($(".content ul"),function(i,val){
+      if(val.id==idName){
+        $(".content ul").eq(i).append(moveList);
+        }
+    });
+  }
+//ç”»å‡ºå…¨éƒ¨ç›¸å†Œ
+//åˆå§‹è¯åˆ—è¡¨å¤´æ•°é‡
 var totalNum=function(arrTwo){
-		var ospan= document.createElement("span"); 
-		var onum= document.createTextNode("("+arrTwo.length+")");
-		ospan.appendChild(onum);
-		$("#outer_wrap .list-head").append(ospan);
+    var ospan= document.createElement("span");
+    var onum= document.createTextNode("("+arrTwo.length+")");
+    ospan.appendChild(onum);
+    $("#outer_wrap .list-head").append(ospan);
 }
-//³õÊ¼»¯¾ßÌåÁÐ±í
-//³õÊ¼»¯ÁÐ±í
+//åˆå§‹åŒ–å…·ä½“åˆ—è¡¨
+//åˆå§‹åŒ–åˆ—è¡¨
 var totalList=function(arrOne,arrTwo,index){
-		var	firstListName;
-		var imglist=[]; 
-		for(var k=1;k<=arrOne.length;k++){
-			 $.each(arrOne, function (i, val) {		
-			 		if(parseInt(val.index)===k){
-						//»ñÈ¡µÚÒ»¸öµÄÀàÃû
-						if(k==1){firstListName=val.name};
-						var name=val.name;
-						var mm=0;
-						$.each(arrTwo,function(i,val){
-							if(val.oclass==name){mm++;}	
-						})
-						var oli= document.createElement("li"); 
-						 oli.setAttribute("id",val.id);
-						 oli.setAttribute("index",val.index);
-					 	oli.setAttribute("draggable",true);
-						oli.setAttribute("value",val.name);
-						oli.setAttribute("number",val.number);
-					 	oli.addEventListener("dragstart", function(ev) {
-						ev.dataTransfer.setData("Text",ev.target.id);},false);
-						var ospan1= document.createElement("span"); 
-						 ospan1.setAttribute("class","sort-list-spanOne");
-					    var otext1 = document.createTextNode(val.name);
-						 ospan1.appendChild(otext1);
-						 oli.appendChild(ospan1);
-						 var ospan=document.createElement("span");
-						  ospan.setAttribute("class","sort-list-spanTwo");
-						 var onum= document.createTextNode("("+val.number+")");
-						 ospan.appendChild(onum);
-						 oli.appendChild(ospan);
-					 	document.getElementById("outer_wrap").appendChild(oli); 
-							}
-						})
-					 }
-		return 	firstListName;
+    var firstListName;
+    var imglist=[];
+    for(var k=1;k<=arrOne.length;k++){
+       $.each(arrOne, function (i, val) {
+          if(parseInt(val.index)===k){
+            //èŽ·å–ç¬¬ä¸€ä¸ªçš„ç±»å
+            if(k==1){firstListName=val.name};
+            var name=val.name;
+            var mm=0;
+            $.each(arrTwo,function(i,val){
+              if(val.oclass==name){mm++;}
+            })
+            var oli= document.createElement("li");
+             oli.setAttribute("id",val.id);
+             oli.setAttribute("index",val.index);
+            oli.setAttribute("draggable",true);
+            oli.setAttribute("value",val.name);
+            oli.setAttribute("number",val.number);
+            oli.addEventListener("dragstart", function(ev) {
+            ev.dataTransfer.setData("Text",ev.target.id);},false);
+            var ospan1= document.createElement("span");
+             ospan1.setAttribute("class","sort-list-spanOne");
+              var otext1 = document.createTextNode(val.name);
+             ospan1.appendChild(otext1);
+             oli.appendChild(ospan1);
+             var ospan=document.createElement("span");
+              ospan.setAttribute("class","sort-list-spanTwo");
+             var onum= document.createTextNode("("+val.number+")");
+             ospan.appendChild(onum);
+             oli.appendChild(ospan);
+            document.getElementById("outer_wrap").appendChild(oli);
+              }
+            })
+           }
+    return  firstListName;
 }
-//µÃµ½µ±Ç°µÄÍ¼Æ¬ÊýÁÐ±í[id,name,i,num]
+//å¾—åˆ°å½“å‰çš„å›¾ç‰‡æ•°åˆ—è¡¨[id,name,i,num]
 function GetArrNum(arrList){
-	$.each($("#outer_wrap li"),function(i,val){
-						var num=val.getAttribute("number");
-						var name=val.getAttribute("value");
-						
-						arrList.push([val.id,name,i,num])
-						});
-	return arrList;
-	}
-//ÒÆ¶¯·ÖÀà¸Ä±äÊý¾Ý
+  $.each($("#outer_wrap li"),function(i,val){
+            var num=val.getAttribute("number");
+            var name=val.getAttribute("value");
+
+            arrList.push([val.id,name,i,num])
+            });
+  return arrList;
+  }
+//ç§»åŠ¨åˆ†ç±»æ”¹å˜æ•°æ®
 function changNumList(arrList,add_name,minu_name){
-	for(var i=0;i<arrList.length;i++){
-		if(arrList[i][1]==add_name){
-			arrList[i][3]++;
-			}else	if(arrList[i][1]==minu_name){
-			arrList[i][3]--;	
-				};
-		}
-		return arrList;
-	}
-//Çå³ýËùÓÐµÄliÁÐ±í
+  for(var i=0;i<arrList.length;i++){
+    if(arrList[i][1]==add_name){
+      arrList[i][3]++;
+      }else if(arrList[i][1]==minu_name){
+      arrList[i][3]--;
+        };
+    }
+    return arrList;
+  }
+//æ¸…é™¤æ‰€æœ‰çš„liåˆ—è¡¨
 function clearList(){
-	$("#outer_wrap li").remove();
-	}
-//ÖØ»­liÁÐ±ídpaintList(arrList)
+  $("#outer_wrap li").remove();
+  }
+//é‡ç”»liåˆ—è¡¨dpaintList(arrList)
 function dpaintList(arrList){
-	for(var k=0;k<arrList.length;k++){
-		var oli= document.createElement("li"); 
-		  oli.setAttribute("id",arrList[k][0]);
-		  oli.setAttribute("index",arrList[k][2]);
-		  oli.setAttribute("draggable",true);
-		  oli.setAttribute("value",arrList[k][1]);
-		  oli.setAttribute("number",arrList[k][3]);
-		  oli.addEventListener("dragstart", function(ev) {
-			ev.dataTransfer.setData("Text",ev.target.id);},false);
-		   var ospan1= document.createElement("span"); 
-		   ospan1.setAttribute("class","sort-list-spanOne");
-			var otext1 = document.createTextNode(arrList[k][1]);
-			 ospan1.appendChild(otext1);
-			 oli.appendChild(ospan1);
-			 var ospan=document.createElement("span");
-			 ospan.setAttribute("class","sort-list-spanTwo");
-			 var onum= document.createTextNode("("+arrList[k][3]+")");
-			 ospan.appendChild(onum);
-			  oli.appendChild(ospan);
-			document.getElementById("outer_wrap").appendChild(oli); 		
-		}
-	}
-//ÁÐ±íÍÏ×§¹¦ÄÜµÄÏìÓ¦
+  for(var k=0;k<arrList.length;k++){
+    var oli= document.createElement("li");
+      oli.setAttribute("id",arrList[k][0]);
+      oli.setAttribute("index",arrList[k][2]);
+      oli.setAttribute("draggable",true);
+      oli.setAttribute("value",arrList[k][1]);
+      oli.setAttribute("number",arrList[k][3]);
+      oli.addEventListener("dragstart", function(ev) {
+      ev.dataTransfer.setData("Text",ev.target.id);},false);
+       var ospan1= document.createElement("span");
+       ospan1.setAttribute("class","sort-list-spanOne");
+      var otext1 = document.createTextNode(arrList[k][1]);
+       ospan1.appendChild(otext1);
+       oli.appendChild(ospan1);
+       var ospan=document.createElement("span");
+       ospan.setAttribute("class","sort-list-spanTwo");
+       var onum= document.createTextNode("("+arrList[k][3]+")");
+       ospan.appendChild(onum);
+        oli.appendChild(ospan);
+      document.getElementById("outer_wrap").appendChild(oli);
+    }
+  }
+//åˆ—è¡¨æ‹–æ‹½åŠŸèƒ½çš„å“åº”
 function allowDrop(ev)
 {
 ev.preventDefault();
@@ -209,335 +209,335 @@ ev.preventDefault();
 {
 ev.dataTransfer.setData("Text",ev.target.id);
 }*/
-//ÁÐ±íµÄ¶¯×÷
+//åˆ—è¡¨çš„åŠ¨ä½œ
 function dropSpe(ev,arr)
 {
 //console.log(arr.x)
 ev.preventDefault();
 //console.log(arr);
 var data=ev.dataTransfer.getData("Text");
-//À´×ÔÓÚÍ¼Ïñ
+//æ¥è‡ªäºŽå›¾åƒ
 if(document.getElementById(data).parentNode.className=="list-img"){
-	if(ev.target.tagName.toLowerCase() == 'ul'&&ev.target.id=="outer_wrap"){	
-	   var listName=$("#outer_wrap li:last-child").attr("value");
-		var imgName=document.getElementById(data).parentNode.id;
-		if(listName!==imgName){
-			changeImgList(listName,document.getElementById(data));
-			var arrList=[];
-			// GetArrNum(arrList)ÄÃµ½µ±Ç°µÄÍ¼Æ¬ÊýÁÐ±í[id,num]
-			GetArrNum(arrList);
-			//console.log(arrList);
-			//¸Ä±äÁÐ±íÊý¾ÝchangNumList(arrList,add_name,minu_name)
-			changNumList(arrList,listName,imgName);
-			//console.log(arrList);
-			//Çå³ýËùÓÐµÄli
-			clearList();
-			//ÖØ»­liÁÐ±ídpaintList(arrList)
-			dpaintList(arrList);
-			//¸øÏà²á°ïÉÏµã»÷¶¯×÷
-			$("#outer_wrap li").click(function(){
-			 	 changeDisplay(this.getAttribute("value"));
-			});
-			
-			
-		  var arrListOne=[];
-		  //getImgListNow(arrList)   arrToStringImg(newList,str)
-		  getImgListNow(arrListOne);
-		  var str="";
-		  var json=arrToStringImg(arrListOne,str);
-		  	//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		 var url="../php/manage1.php";
-		 changeAjax(json,url);
-		  var newList=[];
-		  GetArrNum(newList) 
-		  //ÐÂµÄÁÐ±íµÄÅÅÐò  [id name index number ] index ´Ó0¿ªÊ¼
-		  var str_sort="";
-		  var json1=arrToString(newList,str_sort);
-		  //changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		  var url_1="../php/manage.php";
-		  changeAjax(json1,url_1);
-		}
-	}else if (ev.target.tagName.toLowerCase() == 'li'&&ev.target.parentNode.id=="outer_wrap"){
-		var imgName=document.getElementById(data).parentNode.id;
-		var listName=ev.target.getAttribute("value");
-		if(listName!==imgName){
-			changeImgList(listName,document.getElementById(data));
-			var arrList=[];
-			// GetArrNum(arrList)ÄÃµ½µ±Ç°µÄÍ¼Æ¬ÊýÁÐ±í[id,num]
-			GetArrNum(arrList);
-			//console.log(arrList);
-			//¸Ä±äÁÐ±íÊý¾ÝchangNumList(arrList,add_name,minu_name)
-			changNumList(arrList,listName,imgName);
-			//console.log(arrList);
-			//Çå³ýËùÓÐµÄli
-			clearList();
-			//ÖØ»­liÁÐ±ídpaintList(arrList)
-			dpaintList(arrList);
-			//¸øÏà²á°ïÉÏµã»÷¶¯×÷
-			$("#outer_wrap li").click(function(){
-			 	 changeDisplay(this.getAttribute("value"));
-			});	
-		   var arrListOne=[];
-		   //getImgListNow(arrList)   arrToStringImg(newList,str)
-		   getImgListNow(arrListOne);
-		   var str="";
-		   var json=arrToStringImg(arrListOne,str);
-		   //changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		 	var url="../php/manage1.php";
-		 	changeAjax(json,url);
-		  	 var newList=[];
-		 	 GetArrNum(newList) 
-		  //ÐÂµÄÁÐ±íµÄÅÅÐò  [id name index number ] index ´Ó0¿ªÊ¼
-		  // arrToString(newList,str)
-		  //alert(newList);
-		  var str_sort="";
-		  var json1=arrToString(newList,str_sort);
-		  //changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		 var url_1="../php/manage.php";
-		 changeAjax(json1,url_1);
-		}
-	}else if(ev.target.tagName.toLowerCase() == 'span'&&ev.target.parentNode.tagName.toLowerCase() == 'li'){
-		var imgName=document.getElementById(data).parentNode.id;
-		var listName=ev.target.parentNode.getAttribute("value");
-		if(listName!==imgName){
-			changeImgList(listName,document.getElementById(data));
-			var arrList=[];
-			// GetArrNum(arrList)ÄÃµ½µ±Ç°µÄÍ¼Æ¬ÊýÁÐ±í[id,num]
-			GetArrNum(arrList);
-			//console.log(arrList);
-			//¸Ä±äÁÐ±íÊý¾ÝchangNumList(arrList,add_name,minu_name)
-			changNumList(arrList,listName,imgName);
-			//console.log(arrList);
-			//Çå³ýËùÓÐµÄli
-			clearList();
-			//ÖØ»­liÁÐ±ídpaintList(arrList)
-			dpaintList(arrList);
-			//¸øÏà²á°ïÉÏµã»÷¶¯×÷
-			$("#outer_wrap li").click(function(){
-			 	 changeDisplay(this.getAttribute("value"));
-			});	
-		   var arrListOne=[];
-		  //getImgListNow(arrList)   arrToStringImg(newList,str)
-		  getImgListNow(arrListOne);
-		  var str="";
-		  var json=arrToStringImg(arrListOne,str);
-		  //changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		 var url="../php/manage1.php";
-		 changeAjax(json,url);
-		  var newList=[];
-		  GetArrNum(newList) 
-		  //ÐÂµÄÁÐ±íµÄÅÅÐò  [id name index number ] index ´Ó0¿ªÊ¼
-		  // arrToString(newList,str)
-		  //alert(newList);
-		  var str_sort="";
-		  var json1=arrToString(newList,str_sort);
-		  //changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		 var url_1="../php/manage.php";
-		 changeAjax(json1,url_1);
-			}
-		};
+  if(ev.target.tagName.toLowerCase() == 'ul'&&ev.target.id=="outer_wrap"){
+     var listName=$("#outer_wrap li:last-child").attr("value");
+    var imgName=document.getElementById(data).parentNode.id;
+    if(listName!==imgName){
+      changeImgList(listName,document.getElementById(data));
+      var arrList=[];
+      // GetArrNum(arrList)æ‹¿åˆ°å½“å‰çš„å›¾ç‰‡æ•°åˆ—è¡¨[id,num]
+      GetArrNum(arrList);
+      //console.log(arrList);
+      //æ”¹å˜åˆ—è¡¨æ•°æ®changNumList(arrList,add_name,minu_name)
+      changNumList(arrList,listName,imgName);
+      //console.log(arrList);
+      //æ¸…é™¤æ‰€æœ‰çš„li
+      clearList();
+      //é‡ç”»liåˆ—è¡¨dpaintList(arrList)
+      dpaintList(arrList);
+      //ç»™ç›¸å†Œå¸®ä¸Šç‚¹å‡»åŠ¨ä½œ
+      $("#outer_wrap li").click(function(){
+         changeDisplay(this.getAttribute("value"));
+      });
+
+
+      var arrListOne=[];
+      //getImgListNow(arrList)   arrToStringImg(newList,str)
+      getImgListNow(arrListOne);
+      var str="";
+      var json=arrToStringImg(arrListOne,str);
+        //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+     var url="../php/manage1.php";
+     changeAjax(json,url);
+      var newList=[];
+      GetArrNum(newList)
+      //æ–°çš„åˆ—è¡¨çš„æŽ’åº  [id name index number ] index ä»Ž0å¼€å§‹
+      var str_sort="";
+      var json1=arrToString(newList,str_sort);
+      //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+      var url_1="../php/manage.php";
+      changeAjax(json1,url_1);
+    }
+  }else if (ev.target.tagName.toLowerCase() == 'li'&&ev.target.parentNode.id=="outer_wrap"){
+    var imgName=document.getElementById(data).parentNode.id;
+    var listName=ev.target.getAttribute("value");
+    if(listName!==imgName){
+      changeImgList(listName,document.getElementById(data));
+      var arrList=[];
+      // GetArrNum(arrList)æ‹¿åˆ°å½“å‰çš„å›¾ç‰‡æ•°åˆ—è¡¨[id,num]
+      GetArrNum(arrList);
+      //console.log(arrList);
+      //æ”¹å˜åˆ—è¡¨æ•°æ®changNumList(arrList,add_name,minu_name)
+      changNumList(arrList,listName,imgName);
+      //console.log(arrList);
+      //æ¸…é™¤æ‰€æœ‰çš„li
+      clearList();
+      //é‡ç”»liåˆ—è¡¨dpaintList(arrList)
+      dpaintList(arrList);
+      //ç»™ç›¸å†Œå¸®ä¸Šç‚¹å‡»åŠ¨ä½œ
+      $("#outer_wrap li").click(function(){
+         changeDisplay(this.getAttribute("value"));
+      });
+       var arrListOne=[];
+       //getImgListNow(arrList)   arrToStringImg(newList,str)
+       getImgListNow(arrListOne);
+       var str="";
+       var json=arrToStringImg(arrListOne,str);
+       //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+      var url="../php/manage1.php";
+      changeAjax(json,url);
+         var newList=[];
+       GetArrNum(newList)
+      //æ–°çš„åˆ—è¡¨çš„æŽ’åº  [id name index number ] index ä»Ž0å¼€å§‹
+      // arrToString(newList,str)
+      //alert(newList);
+      var str_sort="";
+      var json1=arrToString(newList,str_sort);
+      //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+     var url_1="../php/manage.php";
+     changeAjax(json1,url_1);
+    }
+  }else if(ev.target.tagName.toLowerCase() == 'span'&&ev.target.parentNode.tagName.toLowerCase() == 'li'){
+    var imgName=document.getElementById(data).parentNode.id;
+    var listName=ev.target.parentNode.getAttribute("value");
+    if(listName!==imgName){
+      changeImgList(listName,document.getElementById(data));
+      var arrList=[];
+      // GetArrNum(arrList)æ‹¿åˆ°å½“å‰çš„å›¾ç‰‡æ•°åˆ—è¡¨[id,num]
+      GetArrNum(arrList);
+      //console.log(arrList);
+      //æ”¹å˜åˆ—è¡¨æ•°æ®changNumList(arrList,add_name,minu_name)
+      changNumList(arrList,listName,imgName);
+      //console.log(arrList);
+      //æ¸…é™¤æ‰€æœ‰çš„li
+      clearList();
+      //é‡ç”»liåˆ—è¡¨dpaintList(arrList)
+      dpaintList(arrList);
+      //ç»™ç›¸å†Œå¸®ä¸Šç‚¹å‡»åŠ¨ä½œ
+      $("#outer_wrap li").click(function(){
+         changeDisplay(this.getAttribute("value"));
+      });
+       var arrListOne=[];
+      //getImgListNow(arrList)   arrToStringImg(newList,str)
+      getImgListNow(arrListOne);
+      var str="";
+      var json=arrToStringImg(arrListOne,str);
+      //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+     var url="../php/manage1.php";
+     changeAjax(json,url);
+      var newList=[];
+      GetArrNum(newList)
+      //æ–°çš„åˆ—è¡¨çš„æŽ’åº  [id name index number ] index ä»Ž0å¼€å§‹
+      // arrToString(newList,str)
+      //alert(newList);
+      var str_sort="";
+      var json1=arrToString(newList,str_sort);
+      //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+     var url_1="../php/manage.php";
+     changeAjax(json1,url_1);
+      }
+    };
 }
-//·ÅµÄÎ»ÖÃÎªÀà±ðÏÂÃæµÄ¿Õ°× ²¢ÇÒÊÇÀ´×ÔÓÚÀà±ðµÄli 
+//æ”¾çš„ä½ç½®ä¸ºç±»åˆ«ä¸‹é¢çš„ç©ºç™½ å¹¶ä¸”æ˜¯æ¥è‡ªäºŽç±»åˆ«çš„li
 else if(document.getElementById(data).parentNode.className=="list-sort"){
-	if(ev.target.tagName.toLowerCase() == 'ul'&&ev.target.className == 'list-sort'){
-		
-		document.getElementById("outer_wrap").appendChild(document.getElementById(data));
-		//GetArrNum(arrList) 
-		var newList=[];
-		GetArrNum(newList) 
-		//ÐÂµÄÁÐ±íµÄÅÅÐò  [id name index number ] index ´Ó0¿ªÊ¼
-		// arrToString(newList,str)
-		//alert(newList);
-		var str="";
-		var json1=arrToString(newList,str);
-		//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		var url="../php/manage.php";
-		changeAjax(json1,url);
-		
-	}else if(ev.target.tagName.toLowerCase() == 'li'&&ev.target.parentNode.className == 'list-sort'){
-		ev.target.parentNode.insertBefore(document.getElementById(data),ev.target);
-		var newList=[];
-		GetArrNum(newList) 
-		//ÐÂµÄÁÐ±íµÄÅÅÐò  [id name index number ] index ´Ó0¿ªÊ¼
-		// arrToString(newList,str)
-		//alert(newList);
-		var str="";
-		var json1=arrToString(newList,str);
-		//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		var url="../php/manage.php";
-		changeAjax(json1,url);
-	  }else if(ev.target.className == 'sort-list-span'){
-		ev.target.parentNode.parentNode.insertBefore(document.getElementById(data),ev.target.parentNode);
-		var newList=[];
-		GetArrNum(newList) 
-		//ÐÂµÄÁÐ±íµÄÅÅÐò  [id name index number ] index ´Ó0¿ªÊ¼
-		// arrToString(newList,str)
-		//alert(newList);
-		var str="";
-		var json1=arrToString(newList,str);
-		//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		var url="../php/manage.php";
-		changeAjax(json1,url);
-		  }
+  if(ev.target.tagName.toLowerCase() == 'ul'&&ev.target.className == 'list-sort'){
 
-	}
+    document.getElementById("outer_wrap").appendChild(document.getElementById(data));
+    //GetArrNum(arrList)
+    var newList=[];
+    GetArrNum(newList)
+    //æ–°çš„åˆ—è¡¨çš„æŽ’åº  [id name index number ] index ä»Ž0å¼€å§‹
+    // arrToString(newList,str)
+    //alert(newList);
+    var str="";
+    var json1=arrToString(newList,str);
+    //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+    var url="../php/manage.php";
+    changeAjax(json1,url);
+
+  }else if(ev.target.tagName.toLowerCase() == 'li'&&ev.target.parentNode.className == 'list-sort'){
+    ev.target.parentNode.insertBefore(document.getElementById(data),ev.target);
+    var newList=[];
+    GetArrNum(newList)
+    //æ–°çš„åˆ—è¡¨çš„æŽ’åº  [id name index number ] index ä»Ž0å¼€å§‹
+    // arrToString(newList,str)
+    //alert(newList);
+    var str="";
+    var json1=arrToString(newList,str);
+    //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+    var url="../php/manage.php";
+    changeAjax(json1,url);
+    }else if(ev.target.className == 'sort-list-span'){
+    ev.target.parentNode.parentNode.insertBefore(document.getElementById(data),ev.target.parentNode);
+    var newList=[];
+    GetArrNum(newList)
+    //æ–°çš„åˆ—è¡¨çš„æŽ’åº  [id name index number ] index ä»Ž0å¼€å§‹
+    // arrToString(newList,str)
+    //alert(newList);
+    var str="";
+    var json1=arrToString(newList,str);
+    //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+    var url="../php/manage.php";
+    changeAjax(json1,url);
+      }
+
+  }
 
 }
-//Í¼Æ¬µÄÍÏ×§
+//å›¾ç‰‡çš„æ‹–æ‹½
 function dropSpeImg(ev,arr)
 {
-	ev.preventDefault();
-	var data=ev.dataTransfer.getData("Text");
-	if(ev.target.tagName.toLowerCase() == 'ul'&&ev.target.className=="list-img"&&document.getElementById(data).parentNode.className=="list-img"){
-	//ÐèÒªÕÒµ½¶ÔÓ¦µÄul
-	document.getElementById(data).parentNode.appendChild(document.getElementById(data));
-	var arrList=[];
-	//getImgListNow(arrList)   arrToStringImg(newList,str)
-	getImgListNow(arrList);
-	//console.log(arrList);
-	var str="";
-	var json1=arrToStringImg(arrList,str);
-	//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-	var url="../php/manage1.php";
-	changeAjax(json1,url);
-	
+  ev.preventDefault();
+  var data=ev.dataTransfer.getData("Text");
+  if(ev.target.tagName.toLowerCase() == 'ul'&&ev.target.className=="list-img"&&document.getElementById(data).parentNode.className=="list-img"){
+  //éœ€è¦æ‰¾åˆ°å¯¹åº”çš„ul
+  document.getElementById(data).parentNode.appendChild(document.getElementById(data));
+  var arrList=[];
+  //getImgListNow(arrList)   arrToStringImg(newList,str)
+  getImgListNow(arrList);
+  //console.log(arrList);
+  var str="";
+  var json1=arrToStringImg(arrList,str);
+  //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+  var url="../php/manage1.php";
+  changeAjax(json1,url);
+
 }else  if(ev.target.tagName.toLowerCase()=="li"&&ev.target.parentNode.className=="list-img"&&document.getElementById(data).parentNode.className=="list-img"){
-		document.getElementById(data).parentNode.insertBefore(document.getElementById(data),ev.target);
-		var arrList=[];
-		//getImgListNow(arrList)   arrToStringImg(newList,str)
-		getImgListNow(arrList);
-		//console.log(arrList);
-		var str="";
-		var json1=arrToStringImg(arrList,str);
-		//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		var url="../php/manage1.php";
-		changeAjax(json1,url);
-		}else if(ev.target.tagName.toLowerCase() == "div"&&ev.target.parentNode.tagName.toLowerCase()=="li"&&document.getElementById(data).parentNode.className=="list-img"){
-		
-		document.getElementById(data).parentNode.insertBefore(document.getElementById(data),ev.target.parentNode);
-		var arrList=[];
-		//getImgListNow(arrList)   arrToStringImg(newList,str)
-		getImgListNow(arrList);
-		//console.log(arrList);
-		var str="";
-		var json1=arrToStringImg(arrList,str);
-		//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		var url="../php/manage1.php";
-		changeAjax(json1,url);
+    document.getElementById(data).parentNode.insertBefore(document.getElementById(data),ev.target);
+    var arrList=[];
+    //getImgListNow(arrList)   arrToStringImg(newList,str)
+    getImgListNow(arrList);
+    //console.log(arrList);
+    var str="";
+    var json1=arrToStringImg(arrList,str);
+    //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+    var url="../php/manage1.php";
+    changeAjax(json1,url);
+    }else if(ev.target.tagName.toLowerCase() == "div"&&ev.target.parentNode.tagName.toLowerCase()=="li"&&document.getElementById(data).parentNode.className=="list-img"){
 
-	}else if((ev.target.tagName.toLowerCase() == 'img'||ev.target.tagName.toLowerCase() == 'span'||ev.target.tagName.toLowerCase() == 'button')&&document.getElementById(data).parentNode.className=="list-img"){	
-		document.getElementById(data).parentNode.insertBefore(document.getElementById(data),ev.target.parentNode.parentNode);
-		var arrList=[];
-		//getImgListNow(arrList)   arrToStringImg(newList,str)
-		getImgListNow(arrList);
-		//console.log(arrList);
-		var str="";
-		var json1=arrToStringImg(arrList,str);
-		//changeAjax(json,url) ÉÏ´«¸ø·þÎñÆ÷php
-		var url="../php/manage1.php";
-		changeAjax(json1,url);
-		}
+    document.getElementById(data).parentNode.insertBefore(document.getElementById(data),ev.target.parentNode);
+    var arrList=[];
+    //getImgListNow(arrList)   arrToStringImg(newList,str)
+    getImgListNow(arrList);
+    //console.log(arrList);
+    var str="";
+    var json1=arrToStringImg(arrList,str);
+    //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+    var url="../php/manage1.php";
+    changeAjax(json1,url);
+
+  }else if((ev.target.tagName.toLowerCase() == 'img'||ev.target.tagName.toLowerCase() == 'span'||ev.target.tagName.toLowerCase() == 'button')&&document.getElementById(data).parentNode.className=="list-img"){
+    document.getElementById(data).parentNode.insertBefore(document.getElementById(data),ev.target.parentNode.parentNode);
+    var arrList=[];
+    //getImgListNow(arrList)   arrToStringImg(newList,str)
+    getImgListNow(arrList);
+    //console.log(arrList);
+    var str="";
+    var json1=arrToStringImg(arrList,str);
+    //changeAjax(json,url) ä¸Šä¼ ç»™æœåŠ¡å™¨php
+    var url="../php/manage1.php";
+    changeAjax(json1,url);
+    }
 }
-//¸ù¾ÝÀàÃûºÍarr.y »­³ö¶ÔÓ¦µÄÍ¼
+//æ ¹æ®ç±»åå’Œarr.y ç”»å‡ºå¯¹åº”çš„å›¾
 var showImg=function showImg(oclass1 , a2){
-		var imgList=[];
-		$.each(a2, function (i, val) {
-			if(val.oclass==oclass1){
-				imgList.push(val);
-			}
-			return imgList;
-		})
-		//´´½¨Ò»¸öoul
-		 var oul=document.createElement("ul");
-		 oul.setAttribute("id",oclass1);
-	     oul.setAttribute("class","list-img");
-			 for(var j=1;j<=imgList.length;j++){
-			 	$.each(imgList, function (i, val) {
-					if(parseInt(val.index)===j){
-						var oli=document.createElement("li");
-					     oli.setAttribute("id",val.id);
-						// oli.setAttribute("oclass",val.oclass);
-						 oli.setAttribute("addr",val.addr);
-						 oli.setAttribute("name",val.name);
-						 oli.setAttribute("tag",val.tag);
-						 //oli.setAttribute("index",val.index);
-						 oli.setAttribute("draggable",true);
-					 	 oli.addEventListener("dragstart", function(ev) {
-						 ev.dataTransfer.setData("Text",ev.target.id);},false);
-						//´´½¨Òþ²Ø°´¼ü
-						var obutton=document.createElement("button");
-						obutton.setAttribute("draggable",false);
-						obutton.setAttribute("type","hidden");
-						oli.appendChild(obutton);
-						//Í¼Æ¬div¿é
-						var odiv1=document.createElement("div");
-						odiv1.setAttribute("class","imgAddr");
-						var oimg=document.createElement("img");
-						oimg.setAttribute("draggable",false);
-						oimg.setAttribute("src",val.addr);
-						oimg.setAttribute("name",val.name);
-						odiv1.appendChild(oimg);
-						oli.appendChild(odiv1);
-						//footer ¿ì
-						var odiv2=document.createElement("div");
-						odiv2.setAttribute("class","footer");
-						odiv2.setAttribute("draggable",false);
-						//dtag¿é
-						var ospan=document.createElement("apan");
-						var otext = document.createTextNode(val.tag);
-						ospan.appendChild(otext);
-						odiv2.appendChild(ospan);
-						// button ¿é
-						var oButtonOne=document.createElement("button");
-						var oliButtonContent=document.createTextNode("button1");
-						oButtonOne.appendChild(oliButtonContent);
-						odiv2.appendChild(oButtonOne);
-						var oButtonTwo=document.createElement("button");
-						var oliButtonContentTwo=document.createTextNode("button2");
-						oButtonTwo.appendChild(oliButtonContentTwo);
-						odiv2.appendChild(oButtonTwo);
-						
-						oli.appendChild(odiv2);
-						oul.appendChild(oli);
-						
-					}
-				})
-			 }
-		$(".content").append(oul);
-		
-		
-		}
+    var imgList=[];
+    $.each(a2, function (i, val) {
+      if(val.oclass==oclass1){
+        imgList.push(val);
+      }
+      return imgList;
+    })
+    //åˆ›å»ºä¸€ä¸ªoul
+     var oul=document.createElement("ul");
+     oul.setAttribute("id",oclass1);
+       oul.setAttribute("class","list-img");
+       for(var j=1;j<=imgList.length;j++){
+        $.each(imgList, function (i, val) {
+          if(parseInt(val.index)===j){
+            var oli=document.createElement("li");
+               oli.setAttribute("id",val.id);
+            // oli.setAttribute("oclass",val.oclass);
+             oli.setAttribute("addr",val.addr);
+             oli.setAttribute("name",val.name);
+             oli.setAttribute("tag",val.tag);
+             //oli.setAttribute("index",val.index);
+             oli.setAttribute("draggable",true);
+             oli.addEventListener("dragstart", function(ev) {
+             ev.dataTransfer.setData("Text",ev.target.id);},false);
+            //åˆ›å»ºéšè—æŒ‰é”®
+            var obutton=document.createElement("button");
+            obutton.setAttribute("draggable",false);
+            obutton.setAttribute("type","hidden");
+            oli.appendChild(obutton);
+            //å›¾ç‰‡divå—
+            var odiv1=document.createElement("div");
+            odiv1.setAttribute("class","imgAddr");
+            var oimg=document.createElement("img");
+            oimg.setAttribute("draggable",false);
+            oimg.setAttribute("src",val.addr);
+            oimg.setAttribute("name",val.name);
+            odiv1.appendChild(oimg);
+            oli.appendChild(odiv1);
+            //footer å¿«
+            var odiv2=document.createElement("div");
+            odiv2.setAttribute("class","footer");
+            odiv2.setAttribute("draggable",false);
+            //dtagå—
+            var ospan=document.createElement("apan");
+            var otext = document.createTextNode(val.tag);
+            ospan.appendChild(otext);
+            odiv2.appendChild(ospan);
+            // button å—
+            var oButtonOne=document.createElement("button");
+            var oliButtonContent=document.createTextNode("button1");
+            oButtonOne.appendChild(oliButtonContent);
+            odiv2.appendChild(oButtonOne);
+            var oButtonTwo=document.createElement("button");
+            var oliButtonContentTwo=document.createTextNode("button2");
+            oButtonTwo.appendChild(oliButtonContentTwo);
+            odiv2.appendChild(oButtonTwo);
 
-//³õÊ¼»¯Á½¸öjson
+            oli.appendChild(odiv2);
+            oul.appendChild(oli);
+
+          }
+        })
+       }
+    $(".content").append(oul);
+
+
+    }
+
+//åˆå§‹åŒ–ä¸¤ä¸ªjson
 $(document).ready(function(){
-		
-	 	$.when(
-		$.ajax({url:"../js/photo.json"}),$.ajax({url:"../js/detail.json"})
-	).done(function(a1,a2){
-		var  arrOne=a1[0].photo;
-		var  arrTwo=a2[0].detail;
-		//console.log(a1[0].photo);
-		//console.log(a2[0].detail);
-		arr.x=a1[0].photo;
-		arr.y=a2[0].detail;
-		//³õÊ¼»¯È«²¿Ïà²áµÄÊýÁ¿totalNum=function(arrTwo)
-		totalNum(arr.y);
-		//³õÊ¼»¯¾ßÌåÁÐ±ívar totalList=function(arrOne,arrTwo,index) ²¢µÃµ½µÚindex¸öÀàÃû
-		var index=1;
-		var firstListName=totalList(arr.x,arr.y,index);
-		//³õÊ¼»¯content »­³öËùÓÐµÄul
-		$.each(arr.x,function(i,val){
-			var sortListDetail=val;
-			showImg(sortListDetail.name,arr.y);
-							  });
-		//³õÊ¼»¯½çÃæchangeDisplay(idName)
-		changeDisplay(firstListName);
-		//¸øÏà²á°ïÉÏµã»÷¶¯×÷
-		$("#outer_wrap li").click(function(){
-			 	 changeDisplay(this.getAttribute("value"));
-			});
-		
-		
-		})						   
-						   
+
+    $.when(
+    $.ajax({url:"../js/photo.json"}),$.ajax({url:"../js/detail.json"})
+  ).done(function(a1,a2){
+    var  arrOne=a1[0].photo;
+    var  arrTwo=a2[0].detail;
+    //console.log(a1[0].photo);
+    //console.log(a2[0].detail);
+    arr.x=a1[0].photo;
+    arr.y=a2[0].detail;
+    //åˆå§‹åŒ–å…¨éƒ¨ç›¸å†Œçš„æ•°é‡totalNum=function(arrTwo)
+    totalNum(arr.y);
+    //åˆå§‹åŒ–å…·ä½“åˆ—è¡¨var totalList=function(arrOne,arrTwo,index) å¹¶å¾—åˆ°ç¬¬indexä¸ªç±»å
+    var index=1;
+    var firstListName=totalList(arr.x,arr.y,index);
+    //åˆå§‹åŒ–content ç”»å‡ºæ‰€æœ‰çš„ul
+    $.each(arr.x,function(i,val){
+      var sortListDetail=val;
+      showImg(sortListDetail.name,arr.y);
+                });
+    //åˆå§‹åŒ–ç•Œé¢changeDisplay(idName)
+    changeDisplay(firstListName);
+    //ç»™ç›¸å†Œå¸®ä¸Šç‚¹å‡»åŠ¨ä½œ
+    $("#outer_wrap li").click(function(){
+         changeDisplay(this.getAttribute("value"));
+      });
+
+
+    })
+
  })
