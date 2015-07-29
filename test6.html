@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>图像旋转代码</title>
+<!--      <link rel="stylesheet" type="text/less"  href="test5.less" /> -->
+     <link rel="stylesheet" type="text/css"  href="test6.css" />
+     <link rel="icon" href="./img/logo.png" />
+
+</head>
+<body>
+<nav></nav>
+<section class="content">
+<!--这是透明遮罩-->
+	<div class="wall" style="display:none;"></div>
+<!--这是弹出层内容-->
+	<div class='ctrcontent'  style="display:none;">
+<!--这是右侧图片区-->
+		<div class='picbox'>
+			<div class=' quit' ><img src="./img/quit1.png"></div>
+			<div class='placeholder' ><canvas  id='bigImg'></canvas></div>
+		</div>
+<!--这是左侧控件区-->
+		<div class='ctrbox'>
+			<span>照片管理器</span>
+			<div class='save'>
+				<div class='savebtn'>保存图片</div>
+			</div>
+			<div class='spin'>
+				<p>旋转</p>
+				<ul>
+					<li class='counterclockwise'><img src="./img/rightspin.png" alt="逆时针90度" class="btn"></li>
+					<li class='clockwise'><img src="./img/rightspin.png" alt="顺时针90度" class="btn"></li>
+					<li><img src="./img/horizontalflip.png" alt="水平翻转" class="horizontalflip"></li>
+					<li><img src="./img/rightspin.png" alt="垂直翻转" class="btn"></li>
+				</ul>
+			</div>
+			<div class='cut'><p>裁剪</p></div>
+			<div class='filter'>
+        <p>滤镜</p>
+        <ul>
+          <li class='gray'>黑白</li>
+          <li class='inverse'>反色</li>
+          <li class='blur'>模糊</li>
+        </ul>
+      </div>
+		</div>
+	</div>
+
+<!--这是显示的内容-->
+	<div class='picwall'>
+		<ul class='contentPic'>
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng01.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片1</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+      		</div>
+			</li>
+ 			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng02.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片2</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li >
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng03.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片3</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li >
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng04.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片4</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li>
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng05.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片5</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li>
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng06.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片6</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li>
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng07.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片7</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li>
+			<li >
+			<div class='imgAddr'>
+				<a href="#" ><img class="pic" src="./img/dasheng08.jpg"></a>
+			</div>
+			<div class="footer" >
+        		<span class="imgName">图片8</span>
+        		<div class="dropdown">
+        			<a href="#">...</a>
+        			<ul>
+          				<li class='drop'><a href="#">功能1</a></li>
+          				<li class='drop'><a href="#">功能2</a></li>
+          				<li class='drop'><a href="#">功能3</a></li>
+        			</ul>
+        		</div>
+        	</div>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="less.min.js"></script>
+<script type="text/javascript" src="test6.js"></script>
+</body>
+</html>
