@@ -1,4 +1,4 @@
-//disable scroll 滚动条滚动控制
+////disable scroll 滚动条滚动控制
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
 var keys = [37, 38, 39, 40];
@@ -37,8 +37,40 @@ function enable_scroll() {
     }
     window.onmousewheel = document.onmousewheel = document.onkeydown = null;
 }
-
-//图片点击全屏
+////深度克隆
+function cloneObject(src) {
+  var objClone;
+  if (src.constructor == Object){
+    objClone = new src.constructor();
+  }else{
+    objClone = new src.constructor(src.valueOf());
+  }
+  for(var key in src){
+    if ( objClone[key] != src[key] ){
+      if ( typeof(src[key]) == "object" ){
+        objClone[key] = cloneObject(src[key]);
+    }else{
+    objClone[key]= src[key];
+      }
+    }
+  }
+  objClone.toString = src.toString;
+  objClone.valueOf = src.valueOf;
+  return objClone;
+}
+//clone1
+function cloneObject1(obj){
+var o = obj.constructor === Array ? [] : {};
+for(var i in obj){
+if(obj.hasOwnProperty(i)){
+o[i] = typeof obj[i] === "object" ? cloneObject(obj[i]) : obj[i];
+}
+}
+return o;
+} 
+//
+//
+////图片点击全屏
 var currentImg;
 $('.pic').click(function (){
   $(".wall").show();
@@ -60,30 +92,59 @@ $('.pic').click(function (){
     var ctx=canvas.getContext("2d");
     ctx.drawImage(image,0,0);
     var imagedata=ctx.getImageData(0, 0, w, h);//取得canvas像素数据
-    console.log(imagedata.width);
-//点击进行黑白变换
+    //var tempdata=$.extend(true, imagedata, imagedata);
+    //点击进行黑白变换
     $('.gray').click(function(){
+      canvas=document.getElementById("bigImg");
+      ctx=canvas.getContext("2d");
+      ctx.drawImage(image,0,0);
+      imagedata=ctx.getImageData(0, 0, w, h);
+      //恢复原图
       gray(imagedata.data);
-    //替换canvas中的像素数据
+      //替换canvas中的像素数据
       ctx.putImageData(imagedata, 0, 0);
-    //显示canvas
+      //显示canvas
     });
-//点击进行反色变换
+    //点击进行反色变换
     $('.inverse').click(function(){
+      canvas=document.getElementById("bigImg");
+      ctx=canvas.getContext("2d");
+      ctx.drawImage(image,0,0);
+      imagedata=ctx.getImageData(0, 0, w, h);
+      //恢复原图
       inverse(imagedata.data);
       ctx.putImageData(imagedata, 0, 0);
     });
-//点击进行模糊变换
+    //点击进行模糊变换
     $('.blur').click(function(){
+      canvas=document.getElementById("bigImg");
+      ctx=canvas.getContext("2d");
+      ctx.drawImage(image,0,0);
+      imagedata=ctx.getImageData(0, 0, w, h);
+      //恢复原图
       blurprocess(imagedata);
       ctx.putImageData(imagedata,0,0);
     });
-//点击进行镜像变换
+    //点击进行水平翻转
     $('.horizontalflip').click(function(){
+      canvas=document.getElementById("bigImg");
+      ctx=canvas.getContext("2d");
+      ctx.drawImage(image,0,0);
+      imagedata=ctx.getImageData(0, 0, w, h);
+      //恢复原图
       horizontalflip(imagedata);
-      ctx.putImageData(imagedata,0,0)
+      ctx.putImageData(imagedata,0,0);
     });
-
+    //点击进行垂直翻转
+    $('.verticalflip').click(function(){
+      canvas=document.getElementById("bigImg");
+      ctx=canvas.getContext("2d");
+      ctx.drawImage(image,0,0);
+      imagedata=ctx.getImageData(0, 0, w, h);
+      //恢复原图
+      verticalflip(imagedata);
+      ctx.putImageData(imagedata,0,0);
+    });
   }
 });
 
@@ -97,7 +158,7 @@ $(".quit").click(function(){
 
 
 
-//滤镜
+////滤镜代码部分
 //黑白滤镜函数  @parameter  imagedata.data[]
 function gray(data) {
   var len =data.length;
@@ -181,25 +242,50 @@ function blurprocess(imagedata) {
             }
         }
 }
-//水平翻转 测试中
+//水平翻转函数  @parameter  imagedata{}
+//性能不好
 function horizontalflip(canvasData) {
-        var tempCanvasData = canvasData.clone(true,true);
-        for ( var x = 0; x < tempCanvasData.width; x++) // column
+        var tempCanvasData = cloneObject(canvasData.data);
+        for ( var x = 0; x < canvasData.width; x++) // column
         {
-            for ( var y = 0; y < tempCanvasData.height; y++) // row
+            for ( var y = 0; y < canvasData.height; y++) // row
             {
 
                 // Index of the pixel in the array
-                var idx = (x + y * tempCanvasData.width) * 4;
-                var midx = (((tempCanvasData.width -1) - x) + y * tempCanvasData.width) * 4;
+                var idx = (x + y * canvasData.width) * 4;
+                var midx = (((canvasData.width -1) - x) + y * canvasData.width) * 4;
 
                 // assign new pixel value
-                canvasData.data[midx + 0] = tempCanvasData.data[idx + 0]; // Red channel
-                canvasData.data[midx + 1] = tempCanvasData.data[idx + 1]; ; // Green channel
-                canvasData.data[midx + 2] = tempCanvasData.data[idx + 2]; ; // Blue channel
+                canvasData.data[midx + 0] = tempCanvasData[idx + 0]; // Red channel
+                canvasData.data[midx + 1] = tempCanvasData[idx + 1]; // Green channel
+                canvasData.data[midx + 2] = tempCanvasData[idx + 2];  // Blue channel
                 canvasData.data[midx + 3] = 255; // Alpha channel
             }
         }
 }
+//垂直翻转函数  @parameter  imagedata{}
+function verticalflip(canvasData) {
+        var tempCanvasData = cloneObject(canvasData.data);
+        for ( var x = 0; x < canvasData.width; x++) // column
+        {
+            for ( var y = 0; y < canvasData.height; y++) // row
+            {
+
+                // Index of the pixel in the array
+                var idx = (x + y * canvasData.width) * 4;
+                var midx = (((canvasData.height -1) - y) * canvasData.width+ x ) * 4;
+
+                // assign new pixel value
+                canvasData.data[midx + 0] = tempCanvasData[idx + 0]; // Red channel
+                canvasData.data[midx + 1] = tempCanvasData[idx + 1]; // Green channel
+                canvasData.data[midx + 2] = tempCanvasData[idx + 2];  // Blue channel
+                canvasData.data[midx + 3] = 255; // Alpha channel
+            }
+        }
+}
+
+
+
+
 
 
