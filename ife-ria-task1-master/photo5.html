@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>照片管理器</title>
+	<style type="text/css">
+	.left{
+	width:20%;
+	height:100%;
+	float:left;}
+	.banner,.create{
+	width:100%;
+	height:50px;}
+	.photo-nav{
+	width:100%;
+	height:400px;
+	border:1px solid red;}
+	.photo-nav ul{
+	border:1px solid red;
+	width:90%;
+	height:100%;
+	padding:10px;}
+	.photo-nav ul li{
+	border:1px solid red;
+	width:auto;
+	padding:5px;
+	margin-top:20px;}
+	.right{
+	width:78%;
+	height:1000px;
+	float:right;}
+	.right ul{
+	width:100%;
+	height:100%;
+	border:1px solid blue;}
+	.right ul li{
+	width:205px;
+	height:275px;
+	list-style:none;
+	padding:2px;
+	display:block;
+	float:left;}
+	.dimg{
+	width:100%;
+	height:201px;
+	}
+	.dimg img{
+	width:200px;
+	height:200px;
+	}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+</head>
+
+<body>
+<div>
+	<div class="nav left">
+		<div class="banner">
+		照片管理器
+		</div>
+		<div class="create">
+		<button type="button" id="create-sort" onClick="createDiv()">新建相册</button>
+		</div>
+		<div class="photo-nav">
+			<ul id="outer_wrap" class="list-sort" ondrop="dropSpe(event)" ondragover="allowDrop(event)">全部
+			</ul>
+		</div>
+		<div class="save-sort">
+		<button type="button" onClick="" id="#">保存列表顺序</button>
+		<button type="button" onClick="#" id="#">保存图片顺序</button>
+		</div>
+	</div>
+	<div class="content right">
+	<ul class="list-img" id="list-img" ondrop="dropSpeImg(event)" ondragover="allowDrop(event)">
+
+	</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+//初始话列表头数量
+var totalNum=function(arrTwo){
+		var ospan= document.createElement("span");
+		var onum= document.createTextNode("("+arrTwo.length+")");
+		ospan.appendChild(onum);
+		$("#outer_wrap").append(ospan);
+}
+//初始化列表
+var totalList=function(arrOne,arrTwo,index){
+		var	firstListName;
+		var imglist=[];
+		for(var k=1;k<=arrOne.length;k++){
+			 $.each(arrOne, function (i, val) {
+			 		if(parseInt(val.index)===k){
+						//获取第一个的类名
+						if(k==1){firstListName=val.name};
+						var name=val.name;
+						var mm=0;
+						$.each(arrTwo,function(i,val){
+							if(val.oclass==name){mm++;}
+						})
+						var oli= document.createElement("li");
+						 oli.setAttribute("id",val.id);
+						 oli.setAttribute("index",val.index);
+					 	oli.setAttribute("draggable",true);
+						oli.setAttribute("value",val.name);
+					 	oli.addEventListener("dragstart", function(ev) {
+						ev.dataTransfer.setData("Text",ev.target.id);},false);
+						// oli.dragstart=drag(event);
+						 var otext = document.createTextNode(val.name);
+						 oli.appendChild(otext);
+						 var ospan=document.createElement("span");
+						 var onum= document.createTextNode("("+mm+")");
+						 ospan.appendChild(onum);
+						 oli.appendChild(ospan);
+					 	document.getElementById("outer_wrap").appendChild(oli);
+							}
+						})
+					 }
+		return 	firstListName;
+}
+//初始化名字 主要第一个
+var childName=function(arrOne,index){
+	var name;
+	console.log(arrOne);
+	//alert(index);
+	$.each(arrOne,function(i,val){
+		if(val.index===index){
+			alert("11");
+			name=val.name;
+		}
+	});
+	console.log(name);
+	return name;
+}
+
+var removeImg=function removeImg(){
+	$("#outer_wrap li").remove();
+}
+var showImg=function showImg(oclass1 , a2){
+		//alert("hello");
+		var imgList=[];
+		//var oclass=oclass;
+		//console.log(a2);
+		//console.log(oclass);
+		$.each(a2, function (i, val) {
+			//console.log(oclass1);
+			if(val.oclass==oclass1){
+				imgList.push(val);
+			}
+			return imgList;
+		})
+			//console.log(imgList);
+			 for(var j=1;j<=imgList.length;j++){
+			 	$.each(imgList, function (i, val) {
+					if(parseInt(val.index)===j){
+						var oli=document.createElement("li");
+					     oli.setAttribute("id",val.id);
+						 oli.setAttribute("oclass",val.oclass);
+						 oli.setAttribute("index",val.index);
+						 oli.setAttribute("draggable",true);
+					 	 oli.addEventListener("dragstart", function(ev) {
+						 ev.dataTransfer.setData("Text",ev.target.id);},false);
+						var odiv1=document.createElement("div");
+						oli.setAttribute("class","dimg");
+						var oimg=document.createElement("img");
+						//<img  draggable="false" src="img/6.jpg" alt="#"/>
+						oimg.setAttribute("draggable",false);
+						oimg.setAttribute("src",val.addr);
+						oimg.setAttribute("name",val.name);
+						odiv1.appendChild(oimg);
+						oli.appendChild(odiv1);
+						var odiv2=document.createElement("div");
+						odiv2.setAttribute("id","dtag");
+						var otext = document.createTextNode(val.tag);
+						odiv2.appendChild(otext);
+						oli.appendChild(odiv2);
+						document.getElementById("list-img").appendChild(oli);
+					}
+				})
+			 }
+
+
+		}
+
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+}
+function dropSpe(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text");
+//alert(document.getElementById(data).parentNode.className);
+//alert(ev.target.tagName.toLowerCase());
+//来自于图像
+if(document.getElementById(data).parentNode.className=="list-img"){
+	if(ev.target.tagName.toLowerCase() == 'ul'){
+	   var listName=$("#outer_wrap li:last-child").attr("value");
+	   var imgId=document.getElementById(data).getAttribute("id");
+		//alert(listName);
+		var imgName=document.getElementById(data).getAttribute("oclass");
+		//alert(imgName);
+		if(listName!==imgName){
+			document.getElementById("list-img").removeChild(document.getElementById(data));
+			alert("你在相册"+listName+"中，加入一张照片，id为"+imgId);
+		}
+	}else if (ev.target.tagName.toLowerCase() == 'li'){
+		var imgId=document.getElementById(data).getAttribute("id");
+		var imgName=document.getElementById(data).getAttribute("oclass");
+		var listName=ev.target.getAttribute("value");
+		alert(listName);
+		if(listName!==imgName){
+			document.getElementById("list-img").removeChild(document.getElementById(data));
+			alert("你在相册"+listName+"中，加入一张照片，id为"+imgId);
+		}
+	}
+}
+//放的位置为类别下面的空白 并且是来自于类别的li
+if(document.getElementById(data).parentNode.className=="list-sort"){
+	if(ev.target.tagName.toLowerCase() == 'ul'){
+		document.getElementById("outer_wrap").appendChild(document.getElementById(data));
+		//把选中的li加到最后一个 获取他的id 和indexSe  全部修改在indexSe后面的index值
+		var uid=document.getElementById(data).id;
+		//console.log(document.getElementById(data).getAttribute("index"));
+		//获取他的位置setAttribute
+		var uindex =document.getElementById(data).getAttribute("index");
+		//获取总长度
+		var ulength=$("#outer_wrap li").length;
+		alert("一共有"+ulength+"个列表;这次把第"+(uindex)+"个列表移到最后一个,他的id为"+uid);
+	}else if(ev.target.tagName.toLowerCase() == 'li'){
+		ev.target.parentNode.insertBefore(document.getElementById(data),ev.target);
+		//°ÑÑ¡ÖÐµÄli²éµ½Ä¿±êliµÄÇ°Ãæ
+		var uid=document.getElementById(data).id;
+		var ulength=$("#outer_wrap li").length;
+		var uindex =document.getElementById(data).getAttribute("index");
+		var uindex2=ev.target.getAttribute("index");
+		alert("一共有"+ulength+"个列表;这次把第"+(uindex)+"个列表移到"+uindex2+"之前,他的id为"+uid);
+	  }
+//ev.target.parentNode.insertBefore(document.getElementById(data),ev.target);
+	}
+}
+
+function dropSpeImg(ev)
+{
+	ev.preventDefault();
+	var data=ev.dataTransfer.getData("Text");
+	//var srcc=searchLi(ev.target);
+	//alert(ev.target.tagName);
+	//alert(ev.target.parentNode.parentNode.tagName);
+	if(ev.target.tagName.toLowerCase() == 'ul'){
+	//alert("work");
+	document.getElementById("list-img").appendChild(document.getElementById(data));
+	var uid=document.getElementById(data).id;
+	var uindex =document.getElementById(data).getAttribute("index");
+	var ulength=$("#list-img li").length;
+	alert("一共有"+ulength+"个列表;这次把第"+(uindex)+"个列表移到最后一个,他的id为"+uid);
+}
+	 if(ev.target.tagName.toLowerCase()=="li"){
+	 	//alert("11");
+		ev.target.parentNode.parentNode.insertBefore(document.getElementById(data),ev.target.parentNode);
+		var uid=document.getElementById(data).id;
+		var uindex =document.getElementById(data).getAttribute("index");
+		var uindex2=ev.target.getAttribute("index");
+		var ulength=$("#list-img li").length;
+		alert("一共有"+ulength+"个列表;这次把第"+(uindex)+"个列表移到"+uindex2+"之前,他的id为"+uid);
+		}
+	if(ev.target.id == 'dtag'){
+		//alert(ev.target.id);
+		document.getElementById("list-img").insertBefore(document.getElementById(data),ev.target.parentNode);
+		var uid=document.getElementById(data).id;
+		var uindex =document.getElementById(data).getAttribute("index");
+		var uindex2=ev.target.parentNode.getAttribute("index");
+		var ulength=$("#list-img li").length;
+		alert("一共有"+ulength+"个列表;这次把第"+(uindex)+"个列表移到"+uindex2+"之前,他的id为"+uid);
+	}
+	if(ev.target.tagName.toLowerCase() == 'img'){
+		//alert("hello");
+		document.getElementById("list-img").insertBefore(document.getElementById(data),ev.target.parentNode.parentNode);
+		var uid=document.getElementById(data).id;
+		var uindex =document.getElementById(data).getAttribute("index");
+		var uindex2=ev.target.parentNode.parentNode.getAttribute("index");
+		var ulength=$("#list-img li").length;
+		alert("一共有"+ulength+"个列表;这次把第"+(uindex)+"个列表移到"+uindex2+"之前,他的id为"+uid);
+		}
+}
+//新建相册的实现
+function createDiv(){
+	 // alert("hello");
+	 var odiv = document.createElement("div");
+     odiv.setAttribute("id","mydiv");
+	 odiv.style.position="fixed";
+	 odiv.style.marginLeft="400px";
+	 odiv.style.marginTop="100px";
+	 odiv.style.width="300px";
+	 odiv.style.height="300px";
+	 odiv.style.backgroundColor="red";
+	 var ospan=document.createElement("span");
+	 var otext = document.createTextNode("Ïà²áÃû×Ö");
+	 ospan.appendChild(otext);
+	 odiv.appendChild(ospan);
+     document.body.appendChild(odiv);
+}
+$(document).ready(function(){
+
+ 	$.when(
+		$.ajax({url:"js/photo.json"}),$.ajax({url:"js/detail.json"})
+	).done(function(a1,a2){
+		//console.log(a1[0].photo);
+		//console.log(a2[0].detail);
+		var arrOne=a1[0].photo;
+		var arrTwo=a2[0].detail;
+		//初始化全部相册的数量totalNum=function(arrTwo)
+		totalNum(arrTwo);
+
+		//初始化具体列表var totalList=function(arrOne,arrTwo,index) ²¢µÃµ½µÚindex¸öÀàÃû
+		var index=1;
+		var firstListName=totalList(arrOne,arrTwo,index);
+
+		var imglist=[];
+		//alert(firstListName);
+			 $.each(arrTwo, function (i, val) {
+			 	//totalImgList.push(val);
+			 	if(val.oclass==firstListName){
+					imglist.push(val);
+				}
+			 })
+			 //console.log(totalImglist);
+			 for(var j=1;j<=imglist.length;j++){
+			 	$.each(imglist, function (i, val) {
+					if(parseInt(val.index)===j){
+						var oli=document.createElement("li");
+					     oli.setAttribute("id",val.id);
+						 oli.setAttribute("oclass",val.oclass);
+						 oli.setAttribute("index",val.index);
+						 oli.setAttribute("draggable",true);
+					 	 oli.addEventListener("dragstart", function(ev) {
+						 ev.dataTransfer.setData("Text",ev.target.id);},false);
+						var odiv1=document.createElement("div");
+						oli.setAttribute("class","dimg");
+						var oimg=document.createElement("img");
+						//<img  draggable="false" src="img/6.jpg" alt="#"/>
+						oimg.setAttribute("draggable",false);
+						oimg.setAttribute("src",val.addr);
+						oimg.setAttribute("name",val.name);
+						odiv1.appendChild(oimg);
+						oli.appendChild(odiv1);
+						var odiv2=document.createElement("div");
+						odiv2.setAttribute("id","dtag");
+						var otext = document.createTextNode(val.tag);
+						odiv2.appendChild(otext);
+						oli.appendChild(odiv2);
+						document.getElementById("list-img").appendChild(oli);
+					}
+				})
+			 }
+			//给相册ul绑上拖拽动作
+			//$("#outer_wrap").addEventListener("dragstart", function(ev) {},false);
+			//给相册帮上点击动作
+			$("#outer_wrap li").click(function(){
+				$("#list-img li").remove();
+				//alert(this.getAttribute("value"));
+				//console.log(a2[0].detail);
+				showImg(this.getAttribute("value"),arrTwo);
+			});
+			//$("#outer_wrap li").addEventListener('click',removeImg(),false);
+			//$("#outer_wrap li").addEventListener('click',showImg(this.getAttribute("value") , a2[0].detail),false)
+
+		}
+	);
+
+
+
+			})
+</script>
+</body>
+</html>
+
