@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>manage page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="icon" href="../img/logo.png" />
+  <link rel="stylesheet/less" href="../styles/manage.less" />
+   <link rel="stylesheet" type="text/css"  href="../styles/test6.css" />
+  <script src="../js/less.min.js" type="text/javascript"></script>
+  <style type="text/css">
+  img{
+  width:200px;
+  height:200px;}
+  </style>
+</head>
+<body>
+
+<section class="wrapper">
+	<!--这是透明遮罩-->
+	<div class="wall" style="display:none"></div>
+<!--这是弹出层内容-->
+	<div class='ctrcontent'  style="display:none;">
+<!--这是右侧图片区-->
+		<div class='picbox'>
+			<div class=' quit' ><img src="../img/quit1.png"></div>
+      <div class='placeholder' ><canvas  id='bigImg'></canvas></div>
+			<div class=' percentage' >
+        <button class="bigger" type="button">+</button>
+        <input id="percent-content" type="text" value="#" readOnly="true"/>
+        <button class="smaller" type="button">-</button>
+      </div>
+		</div>
+		<!--这是左侧控件区-->
+		<div class='ctrbox'>
+			<p class="topic">照片管理器</p>
+			<div class='save'>
+				<div class='savebtn'>保存图片</div>
+			</div>
+		    <div class='spin'>
+				<p>旋转</p>
+				<ul>
+					<li class='counterclockwise'><img src="../img/right.png" alt="逆时针90度" class="btn"></li>
+					<li class='clockwise'><img src="../img/right.png" alt="顺时针90度" class="btn"></li>
+					<li><img src="../img/right.png" alt="水平翻转" class="btn"></li>
+					<li><img src="../img/right.png" alt="垂直翻转" class="btn"></li>
+				</ul>
+			</div>
+			<div class='filter'>
+			   <p>滤镜</p>
+			    <ul>
+					<li class='gray'><img src="../img/right.png" alt="逆时针90度" class="btn"></li>
+					<li class='inverse'><img src="../img/right.png" alt="顺时针90度" class="btn"></li>
+					<li  class='blur'><img src="../img/right.png" alt="水平翻转" class="btn"></li>
+					<li><img src="../img/right.png" alt="垂直翻转" class="btn"></li>
+
+				</ul>
+			</div>
+			<div class='cut'>
+			   <p>裁剪</p>
+			   <div class="sure-for-cancenl"> <span class="sure-for">确定</span>
+			   <span class="cancel-for">取消</span></div>
+			 	<ul>
+					<li class="size-info"><p>高度</p><span><input type="text"/></span></li>
+					<li class="size-box"><span>X</span></li>
+					<li class="size-confirm"><p>宽度</p><span><input type="text"/></span></li>
+			   </ul>
+
+			</div>
+
+
+		</div>
+	</div>
+  <div class="content" ondrop="dropSpeImg(event,arr)" ondragover="allowDrop(event)">
+
+  </div>
+</section>
+<aside class="nav">
+ <div>照片管理器</div>
+ <div> <button type="button">新建相册</button></div>
+  <ul id="outer_wrap" class="list-sort" ondrop="dropSpe(event,arr)" ondragover="allowDrop(event)"><span class="list-head">全部</span>
+  </ul>
+</aside>
+<script src="../js/jquery.min.js" type="text/javascript"></script>
+<script src="../js/manageOne.js" type="text/javascript"></script>
+</body>
+</html>

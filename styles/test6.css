@@ -1,0 +1,222 @@
+.wall {
+  z-index: 2;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.7;
+}
+.ctrcontent {
+  font-size: 16px;
+  color: #fff;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+.ctrcontent span {
+  display: inline;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #002244;
+}
+.ctrcontent .picbox {
+  width: 80%;
+  height: 80%;
+  float: right;
+}
+.ctrcontent .picbox .quit {
+  /* z-index:4; */
+  height: 40px;
+  width: 40px;
+  margin: 0 auto;
+  position: absolute;
+  top: 10px;
+  right: 37px;
+}
+.ctrcontent .picbox .percentage {
+  /* z-index:4; */
+  height: 50px;
+  width: auto;
+  position: fixed;
+  background-color: #114477;
+  bottom: 5px;
+  right: 27px;
+}
+
+.ctrcontent .picbox .percentage button{
+  margin:0px;
+  height: 50px;
+  width: 70px;
+  display: inline;
+  background-color: #114477;
+  margin:0px;
+}
+.bigger{
+  float:left;
+}
+.small{
+  float:right;
+}
+#percent-content {
+  display: inline;
+  float:left;
+  position:relative;
+  height:50px;
+  width: 100px;
+  text-align: center;
+ border: solid 1px black;
+}
+
+
+.ctrcontent .picbox .quit img {
+  height: 100%;
+  width: 100%;
+}
+.ctrcontent .picbox .placeholder {
+  padding-top:2px;
+  height: 85%;
+  width: 100%;
+}
+.ctrcontent .picbox .placeholder .bigImg {
+  position: relative;
+  max-width: 100%;
+  max-height: 90%;
+  width: 75%;
+  height: auto;
+}
+.ctrcontent .ctrbox {
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+.ctrcontent .ctrbox .topic{
+padding-top:18px;
+margin:0px auto;
+height:40px;}
+.ctrcontent .ctrbox p {
+  margin: 2px auto;
+  height: 30px;
+  padding-top:5px;
+  width: 100%;
+  text-align:center;
+  background-color:#002244;
+}
+.ctrcontent .ctrbox .save {
+  width: 100%;
+  height: 15%;
+  background-color: #003366;
+  border-bottom: 1px solid #003366;
+  font-size: 16px;
+  margin: 0 auto;
+}
+.ctrcontent .ctrbox .save .savebtn {
+ padding-top:7px;
+  width: 130px;
+  height: 28px;
+  margin: 0px auto;
+  text-align: center;
+  display: block;
+  top: 30%;
+  position: relative;
+  background-color: #cc6600;
+  border-radius: 5px;
+}
+.ctrcontent .ctrbox .spin {
+  width: 100%;
+  height: 20%;
+  background-color: #003366;
+  border-bottom: 1px solid #003366;
+  font-size: 16px;
+  margin: 0 auto;
+}
+.ctrcontent .ctrbox .spin ul {
+  height: 100%;
+  margin: 0 auto;
+  background-color: #114477;
+  padding-left:25px;
+}
+.ctrcontent .ctrbox .spin ul li {
+  list-style: none;
+  display: inline;
+  height: 50px;
+  width: 23%;
+  position: relative;
+  left: -20px;
+  top: 20px;
+  margin-left: 5px;
+}
+.ctrcontent .ctrbox .spin ul li img {
+  max-width: 35px;
+  max-height: 40px;
+}
+.ctrcontent .ctrbox .filter {
+  width: 100%;
+  height: 20%;
+  background-color: #003366;
+  border-bottom: 1px solid #003366;
+  font-size: 16px;
+  margin: 0 auto;
+}
+.ctrcontent .ctrbox .filter ul {
+  height: 100%;
+  margin: 0 auto;
+  background-color: #114477;
+  padding-left:25px;
+}
+.ctrcontent .ctrbox .filter ul li {
+  list-style: none;
+  display: inline;
+  height: 50px;
+  width: 23%;
+  position: relative;
+  left: -20px;
+  top: 20px;
+  margin-left: 5px;
+}
+.ctrcontent .ctrbox .filter ul li img {
+  max-width: 35px;
+  max-height: 40px;
+}
+.ctrcontent .ctrbox .cut {
+  width: 100%;
+  height: 30%;
+  background-color: #003366;
+  border-bottom: 1px solid #003366;
+  font-size: 16px;
+  margin: 0 auto;
+}
+.sure-for-cancel{
+margin-top:10px;
+height:25px;
+padding-left:35px;
+padding-bottom:10px;}
+.sure-for-cancel span{
+padding-left:25px;}
+.ctrcontent .ctrbox .cut ul {
+  padding-top:20px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #114477;
+  padding-left:25px;
+}
+.ctrcontent .ctrbox .cut ul li {
+  display:block;
+  width:25%;
+  height: 60px;
+  margin-left:10px;
+  float:left;
+  overflow:hidden;
+}
+.size-box{
+text-align:center;
+padding-top:35px;
+}
+
+
+
+
